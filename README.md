@@ -23,5 +23,5 @@ Optional user stories completed:
      
      Add a rounded corners for the images using the Picasso transformations. 
      
-     ![alt tag](http://imgur.com/a/4EOJ7)
+     ![alt tag](http://i.imgur.com/F2kIFdT.gifv)
 
