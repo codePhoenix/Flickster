@@ -1,9 +1,13 @@
 package com.hphays.flickster;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 
@@ -99,7 +103,30 @@ public class MovieActivity extends AppCompatActivity {
                 super.onFailure(statusCode, headers, throwable, errorResponse);
             }
         });
+
+        lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+            launchDetailView(movies.get(position).getId(), movies.get(position).getOriginalTitle(), movies.get(position).getOverview(),
+                    movies.get(position).getBackdropPath(),movies.get(position).getMovieRating(), position);
+        }
+    });
+
     }
+
+    public void launchDetailView(String movieId, String movieTitle, String movieOverview, String movieBackdrop, float movieRating, int position) {
+        // first parameter is the context, second is the class of the activity to launch
+        Intent i = new Intent(MovieActivity.this, DetailViewActivity.class);
+        i.putExtra("movieId", movieId);
+        i.putExtra("movieTitle", movieTitle);
+        i.putExtra("movieOverview", movieOverview);
+        i.putExtra("movieBackdrop", movieBackdrop);
+        i.putExtra("movieRating", movieRating);
+       // i.putExtra("position", position);
+        startActivity(i); // brings up the second activity
+    }
+
+
 
     public void fetchMoviesAsync(int page) {
 
